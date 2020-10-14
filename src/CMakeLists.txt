@@ -17,6 +17,6 @@ target_compile_definitions(asio INTERFACE ASIO_STANDALONE)
 target_include_directories(asio INTERFACE D:/sdk/asio-1.18.0/include)
 
 
-add_executable(net-main main.cpp)
-target_compile_features(net-main PRIVATE cxx_lambda_init_captures cxx_std_14)
-target_link_libraries(net-main PRIVATE asio)
+add_executable(SimpleExample main.cpp)
+target_compile_features(SimpleExample PRIVATE cxx_lambda_init_captures cxx_std_14)
+target_link_libraries(SimpleExample PRIVATE asio)
