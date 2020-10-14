@@ -33,5 +33,31 @@ int main()
         std::cout << "Failed to connect to address:\n" << ec.message() << std::endl;  
     }
 
+    if (socket.is_open())
+    {
+        // Create a HTTP request
+        std::string sRequest =
+            "GET /index.html HTTP/1.1\r\n"
+            "Host: example.com\r\n"
+            "Connection: close\r\n\r\n";
+
+        // Try to send as much data as possible
+        socket.write_some(asio::buffer(sRequest.data(), sRequest.size()), ec);
+
+        size_t bytes = socket.available();
+        std::cout << "Bytes available: " << bytes << std::endl;
+
+        if (bytes > 0)
+        {
+            std::vector<char> vBuffer(bytes);
+            socket.read_some(asio::buffer(vBuffer.data(), vBuffer.size()), ec);
+
+            for (auto c : vBuffer)
+            {
+                std::cout << c;
+            }
+        }
+    }
+
     return 0;
 }
